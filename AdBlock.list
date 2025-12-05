@@ -4,10 +4,11 @@ HOST-SUFFIX, ads.wechat.com, REJECT
 HOST-SUFFIX, wechatad.com, REJECT
 HOST-SUFFIX, sns-ad.weixin.qq.com, REJECT
 HOST-SUFFIX, mp-ad.weixin.qq.com, REJECT
-HOST-SUFFIX, finder.video.qq.com, REJECT  # 视频号广告
-HOST-SUFFIX, short.weixin.qq.com, REJECT  # 短链广告
+HOST-SUFFIX, finder.video.qq.com, REJECT
+HOST-SUFFIX, short.weixin.qq.com, REJECT
 URL-REGEX, /adreport, REJECT
 URL-REGEX, /cgi-bin/readtemplate\?t=ad, REJECT
 IP-CIDR, 43.249.36.0/22, REJECT, no-resolve
 IP-CIDR, 103.215.218.0/23, REJECT, no-resolve
 IP-CIDR, 203.205.144.0/23, REJECT, no-resolve
+
