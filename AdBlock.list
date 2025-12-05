@@ -1,11 +1,11 @@
-# 微信朋友圈广告屏蔽（2025版，纯分流）
+# 微信朋友圈/视频号广告屏蔽（自用，2025版）
 HOST-SUFFIX, ad.weixin.qq.com, REJECT
 HOST-SUFFIX, ads.wechat.com, REJECT
 HOST-SUFFIX, wechatad.com, REJECT
 HOST-SUFFIX, sns-ad.weixin.qq.com, REJECT
 HOST-SUFFIX, mp-ad.weixin.qq.com, REJECT
-HOST-SUFFIX, finder.video.qq.com, REJECT  # 视频号
-HOST-SUFFIX, short.weixin.qq.com, REJECT  # 短链
+HOST-SUFFIX, finder.video.qq.com, REJECT  # 视频号广告
+HOST-SUFFIX, short.weixin.qq.com, REJECT  # 短链广告
 URL-REGEX, /adreport, REJECT
 URL-REGEX, /cgi-bin/readtemplate\?t=ad, REJECT
 IP-CIDR, 43.249.36.0/22, REJECT, no-resolve
