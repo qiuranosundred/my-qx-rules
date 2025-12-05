@@ -1,4 +1,4 @@
-# 微信朋友圈广告屏蔽（2025版，纯分流，自用）
+# 微信朋友圈/视频号/看一看/公众号 终极去广告（2025-12 自用版）
 HOST-SUFFIX, ad.weixin.qq.com, REJECT
 HOST-SUFFIX, ads.wechat.com, REJECT
 HOST-SUFFIX, wechatad.com, REJECT
@@ -6,9 +6,22 @@ HOST-SUFFIX, sns-ad.weixin.qq.com, REJECT
 HOST-SUFFIX, mp-ad.weixin.qq.com, REJECT
 HOST-SUFFIX, finder.video.qq.com, REJECT
 HOST-SUFFIX, short.weixin.qq.com, REJECT
+HOST-SUFFIX, adinfo.weixin.qq.com, REJECT          # 新增
+HOST-SUFFIX, adserver.wechat.com, REJECT          # 新增
+HOST-SUFFIX, wxapp.tc.qq.com, REJECT               # 新增视频号广告
+HOST-SUFFIX, admini.wechat.com, REJECT             # 新增小程序广告
+HOST-SUFFIX, admicro.weixin.qq.com, REJECT         # 新增
+
+# 关键路径正则（必须留）
 URL-REGEX, /adreport, REJECT
 URL-REGEX, /cgi-bin/readtemplate\?t=ad, REJECT
+URL-REGEX, adlog, REJECT
+URL-REGEX, adpos, REJECT
+
+# 2025 年新增广告 IP 段（超级顽固，必须拦）
 IP-CIDR, 43.249.36.0/22, REJECT, no-resolve
 IP-CIDR, 103.215.218.0/23, REJECT, no-resolve
 IP-CIDR, 203.205.144.0/23, REJECT, no-resolve
-
+IP-CIDR, 129.28.32.0/19, REJECT, no-resolve      # 新增
+IP-CIDR, 119.28.28.0/24, REJECT, no-resolve       # 新增
+IP-CIDR6, 2402:f000:4::/48, REJECT, no-resolve    # IPv6 广告段
