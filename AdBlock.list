@@ -1,4 +1,4 @@
-# 微信朋友圈/视频号广告屏蔽（自用，2025版）
+# 微信朋友圈广告屏蔽（2025版，纯分流，自用）
 HOST-SUFFIX, ad.weixin.qq.com, REJECT
 HOST-SUFFIX, ads.wechat.com, REJECT
 HOST-SUFFIX, wechatad.com, REJECT
