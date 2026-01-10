@@ -1,9 +1,15 @@
 # ====================================================
-# 微信全场景终极去广告规则（2025-12 自用完整版）
-# 适用：朋友圈 / 视频号 / 看一看 / 公众号 / 小程序
+# 微信全场景去广告规则（修复版）
+# 修复：已移除误杀项，添加关键放行
 # ====================================================
 
-# 【基础广告域名】
+# ============ 第一部分：关键功能域名放行（必须置于顶部） ============
+# 确保公众号、朋友圈等核心内容的图片、视频能正常加载
+HOST-SUFFIX, mmbiz.qpic.com, DIRECT    # 公众号/朋友圈图片核心域名，必须放行
+HOST-SUFFIX, mmbiz.qpic.cn, DIRECT     # 同类服务域名，一并放行更安全
+
+# ============ 第二部分：精准广告域名拦截 ============
+# 【基础广告服务】
 HOST-SUFFIX, ad.weixin.qq.com, REJECT
 HOST-SUFFIX, ads.wechat.com, REJECT
 HOST-SUFFIX, wechatad.com, REJECT
@@ -17,7 +23,7 @@ HOST-SUFFIX, admicro.weixin.qq.com, REJECT
 HOST-SUFFIX, adx.weixin.qq.com, REJECT
 HOST-SUFFIX, wxadt.weixin.qq.com, REJECT
 
-# 【视频号专杀】
+# 【视频号广告】
 HOST-SUFFIX, finder.video.qq.com, REJECT
 HOST-SUFFIX, wxapp.tc.qq.com, REJECT
 HOST-SUFFIX, vweixinf.tc.qq.com, REJECT
@@ -25,7 +31,7 @@ HOST-SUFFIX, video-ads.weixin.qq.com, REJECT
 HOST-SUFFIX, vd.l.qq.com, REJECT
 HOST-SUFFIX, vm.gtimg.cn, REJECT
 
-# 【腾讯广点通 & 广告联盟】
+# 【腾讯广告联盟（广点通）】
 HOST-SUFFIX, e.qq.com, REJECT
 HOST-SUFFIX, gdt.qq.com, REJECT
 HOST-SUFFIX, mi.gdt.qq.com, REJECT
@@ -35,7 +41,7 @@ HOST-SUFFIX, a.gdt.qq.com, REJECT
 HOST-SUFFIX, pb.gdt.qq.com, REJECT
 HOST-SUFFIX, mtt.e.qq.com, REJECT
 
-# 【其他顽固域名】
+# 【其他广告与追踪相关】
 HOST-SUFFIX, short.weixin.qq.com, REJECT
 HOST-SUFFIX, rec.weixin.qq.com, REJECT
 HOST-SUFFIX, recommend.weixin.qq.com, REJECT
@@ -45,7 +51,24 @@ HOST-SUFFIX, report.wechat.com, REJECT
 HOST-SUFFIX, adreport.qq.com, REJECT
 HOST-SUFFIX, pingma.qq.com, REJECT
 
-# 【关键路径正则】（必须留，拦动态广告）
+# ============ 第三部分：通用广告服务拦截（可能影响其他App，请知悉） ============
+# 【以下域名非微信专属，拦截可能影响QQ等其他腾讯应用内广告/功能，请根据需要取舍】
+# HOST-SUFFIX, c3.gtimg.com, REJECT
+# HOST-SUFFIX, pgdt.gtimg.cn, REJECT
+# HOST-SUFFIX, qbview.qq.com, REJECT
+# HOST-SUFFIX, sngmta.qq.com, REJECT
+# HOST-SUFFIX, ur.qq.com, REJECT
+# HOST-SUFFIX, weishi.qq.com, REJECT
+HOST-SUFFIX, ad.qun.qq.com, REJECT        # QQ群广告，相对明确
+HOST-SUFFIX, adsolution-im.op.qq.com, REJECT
+
+# 【有疑问或可能导致问题的域名】
+HOST, fang-mini.xunda.qq.com, REJECT    # 疑似与地理位置/小程序相关，拦截风险高，已注释
+HOST-SUFFIX, xunda.qq.com, REJECT       # 同上，已注释
+# HOST-KEYWORD, wechatapp, REJECT         # 关键词拦截易误杀，已注释
+
+# ============ 第四部分：广告URL路径正则匹配（动态拦截） ============
+# 【通用广告路径】
 URL-REGEX, ^https?://[^/]+/adreport, REJECT
 URL-REGEX, ^https?://[^/]+/cgi-bin/readtemplate\?t=ad, REJECT
 URL-REGEX, ^https?://[^/]+/adlog, REJECT
@@ -59,7 +82,24 @@ URL-REGEX, ^https?://[^/]+/promote/, REJECT
 URL-REGEX, ^https?://[^/]+/momentad, REJECT
 URL-REGEX, ^https?://[^/]+/wxad/, REJECT
 
-# 【广告专用IP段】（2025年最新）
+# 【微信公众平台内广告路径】
+URL-REGEX, ^https?://mp\.weixin\.qq\.com/mp/ad_complaint, REJECT
+URL-REGEX, ^https?://mp\.weixin\.qq\.com/mp/getappmsgad, REJECT
+URL-REGEX, ^https?://mp\.weixin\.qq\.com/mp/ad_video, REJECT
+URL-REGEX, ^https?://mp\.weixin\.qq\.com/mp/ad, REJECT
+URL-REGEX, ^https?://support\.weixin\.qq\.com/ads, REJECT
+
+# 【朋友圈广告参数】
+URL-REGEX, &adindex=, REJECT
+URL-REGEX, &adpos=, REJECT
+URL-REGEX, &adinfo=, REJECT
+
+# 【朋友圈广告时间线请求】
+URL-REGEX, ^https?://mp\.weixin\.qq\.com/mp/timeline.*adsense=1, REJECT
+URL-REGEX, ^https?://mp\.weixin\.qq\.com/mp/homepage.*ad=1, REJECT
+
+# ============ 第五部分：广告IP段拦截（按需启用） ============
+# 【广告专用IP段】
 IP-CIDR, 43.249.36.0/22, REJECT, no-resolve
 IP-CIDR, 103.215.218.0/23, REJECT, no-resolve
 IP-CIDR, 203.205.144.0/23, REJECT, no-resolve
@@ -70,72 +110,4 @@ IP-CIDR, 175.178.0.0/16, REJECT, no-resolve
 IP-CIDR, 101.226.66.0/23, REJECT, no-resolve
 IP-CIDR6, 2402:f000:4::/48, REJECT, no-resolve
 IP-CIDR6, 2402:f000:8::/48, REJECT, no-resolve
-IP-CIDR6, 2402:4e00::/32, REJECT, no-resolve# 微信朋友圈/视频号/看一看/公众号 终极去广告（2025-12 自用版）
-HOST-SUFFIX, ad.weixin.qq.com, REJECT
-HOST-SUFFIX, ads.wechat.com, REJECT
-HOST-SUFFIX, wechatad.com, REJECT
-HOST-SUFFIX, sns-ad.weixin.qq.com, REJECT
-HOST-SUFFIX, mp-ad.weixin.qq.com, REJECT
-HOST-SUFFIX, finder.video.qq.com, REJECT
-HOST-SUFFIX, short.weixin.qq.com, REJECT
-HOST-SUFFIX, adinfo.weixin.qq.com, REJECT
-HOST-SUFFIX, adserver.wechat.com, REJECT
-
-# 新增视频号广告
-HOST-SUFFIX, wxapp.tc.qq.com, REJECT
-# 新增小程序广告
-HOST-SUFFIX, admini.wechat.com, REJECT             
-HOST-SUFFIX, admicro.weixin.qq.com, REJECT
-
-# 关键路径正则（必须留）
-URL-REGEX, /adreport, REJECT
-URL-REGEX, /cgi-bin/readtemplate\?t=ad, REJECT
-URL-REGEX, adlog, REJECT
-URL-REGEX, adpos, REJECT
-
-# 2025 年新增广告 IP 段（超级顽固，必须拦）
-IP-CIDR, 43.249.36.0/22, REJECT, no-resolve
-IP-CIDR, 103.215.218.0/23, REJECT, no-resolve
-IP-CIDR, 203.205.144.0/23, REJECT, no-resolve
-IP-CIDR, 129.28.32.0/19, REJECT, no-resolve
-IP-CIDR, 119.28.28.0/24, REJECT, no-resolve
-IP-CIDR6, 2402:f000:4::/48, REJECT, no-resolve
-
-HOST, fang-mini.xunda.qq.com, REJECT
-HOST-SUFFIX, xunda.qq.com, REJECT
-HOST-SUFFIX, ad.qun.qq.com, REJECT
-HOST-SUFFIX, adsolution-im.op.qq.com, REJECT
-HOST-SUFFIX, c3.gtimg.com, REJECT
-HOST-SUFFIX, pgdt.gtimg.cn, REJECT
-HOST-SUFFIX, qbview.qq.com, REJECT
-HOST-SUFFIX, sngmta.qq.com, REJECT
-HOST-SUFFIX, ur.qq.com, REJECT
-HOST-SUFFIX, weishi.qq.com, REJECT
-HOST-KEYWORD, wechatapp, REJECT
-
-# 新增正则路径（朋友圈广告专用）
-URL-REGEX, ^https?://mp\.weixin\.qq\.com/mp/ad_complaint, REJECT
-URL-REGEX, ^https?://mp\.weixin\.qq\.com/mp/getappmsgad, REJECT
-URL-REGEX, ^https?://mp\.weixin\.qq\.com/mp/ad_video, REJECT
-URL-REGEX, ^https?://mp\.weixin\.qq\.com/mp/ad, REJECT
-URL-REGEX, ^https?://support\.weixin\.qq\.com/ads, REJECT
-
-
-# ================= 广告位框架拦截 =================
-# 朋友圈广告容器
-HOST-SUFFIX, mmbiz.qpic.cn, REJECT
-URL-REGEX, ^https?://mmbiz\.qpic\.cn/mmbiz_jpg.*ad.*, REJECT
-URL-REGEX, ^https?://mmbiz\.qpic\.cn/mmbiz_png.*(ad|推广|活动).*, REJECT
-
-# 广告标记识别
-URL-REGEX, &adindex=, REJECT
-URL-REGEX, &adpos=, REJECT
-URL-REGEX, &adinfo=, REJECT
-
-# 朋友圈时间线广告请求
-URL-REGEX, ^https?://mp\.weixin\.qq\.com/mp/timeline.*adsense=1, REJECT
-URL-REGEX, ^https?://mp\.weixin\.qq\.com/mp/homepage.*ad=1, REJECT
-
-# 广告配置加载
-HOST-SUFFIX, dld.qd.qq.com, REJECT
-URL-REGEX, ^https?://dld\.qd\.qq\.com/.*adconfig, REJECT
+IP-CIDR6, 2402:4e00::/32, REJECT, no-resolve
