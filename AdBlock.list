@@ -12,6 +12,7 @@ HOST-SUFFIX, mmbiz.qpic.cn, DIRECT
 
 # ============ 第二部分：精准广告域名拦截 ============
 # 【基础广告服务】
+HOST, szminorshort.weixin.qq.com, REJECT
 HOST-SUFFIX, ad.weixin.qq.com, REJECT
 HOST-SUFFIX, ads.wechat.com, REJECT
 HOST-SUFFIX, wechatad.com, REJECT
@@ -115,4 +116,5 @@ IP-CIDR, 101.226.66.0/23, REJECT, no-resolve
 IP-CIDR6, 2402:f000:4::/48, REJECT, no-resolve
 IP-CIDR6, 2402:f000:8::/48, REJECT, no-resolve
 IP-CIDR6, 2402:4e00::/32, REJECT, no-resolve
+
 
