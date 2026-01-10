@@ -121,3 +121,21 @@ URL-REGEX, ^https?://mp\.weixin\.qq\.com/mp/ad, REJECT
 URL-REGEX, ^https?://support\.weixin\.qq\.com/ads, REJECT
 
 
+# ================= 广告位框架拦截 =================
+# 朋友圈广告容器
+HOST-SUFFIX, mmbiz.qpic.cn, REJECT
+URL-REGEX, ^https?://mmbiz\.qpic\.cn/mmbiz_jpg.*ad.*, REJECT
+URL-REGEX, ^https?://mmbiz\.qpic\.cn/mmbiz_png.*(ad|推广|活动).*, REJECT
+
+# 广告标记识别
+URL-REGEX, &adindex=, REJECT
+URL-REGEX, &adpos=, REJECT
+URL-REGEX, &adinfo=, REJECT
+
+# 朋友圈时间线广告请求
+URL-REGEX, ^https?://mp\.weixin\.qq\.com/mp/timeline.*adsense=1, REJECT
+URL-REGEX, ^https?://mp\.weixin\.qq\.com/mp/homepage.*ad=1, REJECT
+
+# 广告配置加载
+HOST-SUFFIX, dld.qd.qq.com, REJECT
+URL-REGEX, ^https?://dld\.qd\.qq\.com/.*adconfig, REJECT
