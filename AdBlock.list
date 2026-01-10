@@ -101,5 +101,23 @@ IP-CIDR, 129.28.32.0/19, REJECT, no-resolve
 IP-CIDR, 119.28.28.0/24, REJECT, no-resolve
 IP-CIDR6, 2402:f000:4::/48, REJECT, no-resolve
 
+HOST, fang-mini.xunda.qq.com, REJECT
+HOST-SUFFIX, xunda.qq.com, REJECT
+HOST-SUFFIX, ad.qun.qq.com, REJECT
+HOST-SUFFIX, adsolution-im.op.qq.com, REJECT
+HOST-SUFFIX, c3.gtimg.com, REJECT
+HOST-SUFFIX, pgdt.gtimg.cn, REJECT
+HOST-SUFFIX, qbview.qq.com, REJECT
+HOST-SUFFIX, sngmta.qq.com, REJECT
+HOST-SUFFIX, ur.qq.com, REJECT
+HOST-SUFFIX, weishi.qq.com, REJECT
+HOST-KEYWORD, wechatapp, REJECT
+
+# 新增正则路径（朋友圈广告专用）
+URL-REGEX, ^https?://mp\.weixin\.qq\.com/mp/ad_complaint, REJECT
+URL-REGEX, ^https?://mp\.weixin\.qq\.com/mp/getappmsgad, REJECT
+URL-REGEX, ^https?://mp\.weixin\.qq\.com/mp/ad_video, REJECT
+URL-REGEX, ^https?://mp\.weixin\.qq\.com/mp/ad, REJECT
+URL-REGEX, ^https?://support\.weixin\.qq\.com/ads, REJECT
 
 
