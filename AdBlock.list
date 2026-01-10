@@ -5,8 +5,10 @@
 
 # ============ 第一部分：关键功能域名放行（必须置于顶部） ============
 # 确保公众号、朋友圈等核心内容的图片、视频能正常加载
-HOST-SUFFIX, mmbiz.qpic.com, DIRECT    # 公众号/朋友圈图片核心域名，必须放行
-HOST-SUFFIX, mmbiz.qpic.cn, DIRECT     # 同类服务域名，一并放行更安全
+# 公众号/朋友圈图片核心域名，必须放行
+HOST-SUFFIX, mmbiz.qpic.com, DIRECT
+# 同类服务域名，一并放行更安全
+HOST-SUFFIX, mmbiz.qpic.cn, DIRECT
 
 # ============ 第二部分：精准广告域名拦截 ============
 # 【基础广告服务】
@@ -59,13 +61,14 @@ HOST-SUFFIX, pingma.qq.com, REJECT
 # HOST-SUFFIX, sngmta.qq.com, REJECT
 # HOST-SUFFIX, ur.qq.com, REJECT
 # HOST-SUFFIX, weishi.qq.com, REJECT
-HOST-SUFFIX, ad.qun.qq.com, REJECT        # QQ群广告，相对明确
+# QQ群广告，相对明确
+HOST-SUFFIX, ad.qun.qq.com, REJECT
 HOST-SUFFIX, adsolution-im.op.qq.com, REJECT
 
 # 【有疑问或可能导致问题的域名】
-HOST, fang-mini.xunda.qq.com, REJECT    # 疑似与地理位置/小程序相关，拦截风险高，已注释
-HOST-SUFFIX, xunda.qq.com, REJECT       # 同上，已注释
-# HOST-KEYWORD, wechatapp, REJECT         # 关键词拦截易误杀，已注释
+HOST, fang-mini.xunda.qq.com, REJECT
+HOST-SUFFIX, xunda.qq.com, REJECT
+# HOST-KEYWORD, wechatapp, REJECT
 
 # ============ 第四部分：广告URL路径正则匹配（动态拦截） ============
 # 【通用广告路径】
@@ -98,6 +101,7 @@ URL-REGEX, &adinfo=, REJECT
 URL-REGEX, ^https?://mp\.weixin\.qq\.com/mp/timeline.*adsense=1, REJECT
 URL-REGEX, ^https?://mp\.weixin\.qq\.com/mp/homepage.*ad=1, REJECT
 
+
 # ============ 第五部分：广告IP段拦截（按需启用） ============
 # 【广告专用IP段】
 IP-CIDR, 43.249.36.0/22, REJECT, no-resolve
@@ -111,3 +115,4 @@ IP-CIDR, 101.226.66.0/23, REJECT, no-resolve
 IP-CIDR6, 2402:f000:4::/48, REJECT, no-resolve
 IP-CIDR6, 2402:f000:8::/48, REJECT, no-resolve
 IP-CIDR6, 2402:4e00::/32, REJECT, no-resolve
+
