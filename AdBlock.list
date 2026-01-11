@@ -12,7 +12,6 @@ HOST-SUFFIX, mmbiz.qpic.cn, DIRECT
 
 # ============ 第二部分：精准广告域名拦截 ============
 # 【基础广告服务】
-HOST, szminorshort.weixin.qq.com, REJECT
 HOST-SUFFIX, ad.weixin.qq.com, REJECT
 HOST-SUFFIX, ads.wechat.com, REJECT
 HOST-SUFFIX, wechatad.com, REJECT
@@ -45,7 +44,6 @@ HOST-SUFFIX, pb.gdt.qq.com, REJECT
 HOST-SUFFIX, mtt.e.qq.com, REJECT
 
 # 【其他广告与追踪相关】
-HOST-SUFFIX, short.weixin.qq.com, REJECT
 HOST-SUFFIX, rec.weixin.qq.com, REJECT
 HOST-SUFFIX, recommend.weixin.qq.com, REJECT
 HOST-SUFFIX, adlog.weixin.qq.com, REJECT
@@ -102,8 +100,6 @@ URL-REGEX, &adinfo=, REJECT
 URL-REGEX, ^https?://mp\.weixin\.qq\.com/mp/timeline.*adsense=1, REJECT
 URL-REGEX, ^https?://mp\.weixin\.qq\.com/mp/homepage.*ad=1, REJECT
 
-#自添加 有问题要修改或删除
-URL-REGEX, ^https?://[^/]*short\.weixin\.qq\.com, REJECT
 
 # ============ 第五部分：广告IP段拦截（按需启用） ============
 # 【广告专用IP段】
@@ -118,6 +114,7 @@ IP-CIDR, 101.226.66.0/23, REJECT, no-resolve
 IP-CIDR6, 2402:f000:4::/48, REJECT, no-resolve
 IP-CIDR6, 2402:f000:8::/48, REJECT, no-resolve
 IP-CIDR6, 2402:4e00::/32, REJECT, no-resolve
+
 
 
 
